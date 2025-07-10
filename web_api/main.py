@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from web_api.detector import FakeReviewDetector
 from web_api.models import Review, MarketLink
 import requests
+
 detector = FakeReviewDetector()
 app = FastAPI()
 
@@ -23,8 +24,6 @@ async def detect_list(link: MarketLink):
         "url": link.url,
         "limit": 20
     }
-
     response = requests.get(url, params=params)
-    print(response.json())
 
-    return response.json()
+    return detector.detect_list_review(response.json()['reviews'])
