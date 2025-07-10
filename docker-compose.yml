@@ -3,7 +3,7 @@ services:
   web_api:
     build: web_api/
     environment:
-      - HF_TOKEN= token
+      - HF_TOKEN=
     ports:
       - 8000:8000
     networks:
