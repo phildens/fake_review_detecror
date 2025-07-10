@@ -1,0 +1,23 @@
+version: "3"
+services:
+  web_api:
+    build: web_api/
+    ports:
+      - 8000:8000
+
+  studcamp-scraper:
+    build: studcamp-scraper/
+    ports:
+      - 8200:8200
+    networks:
+      - app_network
+
+  browser:
+    image: selenium/standalone-chrome
+    ports:
+      - 4444:4444
+
+
+networks:
+  app_network:
+    driver: bridge
