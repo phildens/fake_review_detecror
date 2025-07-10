@@ -18,6 +18,7 @@ services:
 
   browser:
     image: selenium/standalone-chrome
+    shm_size: '2gb'
     ports:
       - 4444:4444
     networks:
