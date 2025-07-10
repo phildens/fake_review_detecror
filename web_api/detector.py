@@ -18,8 +18,6 @@ class FakeReviewDetector:
     def __init__(self):
         model_name = ("SravaniNirati/bert_fake_review_detection")
 
-        # Загрузка токенизатора и модели
-
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
         self.model = AutoModelForSequenceClassification.from_pretrained(model_name)
         print("создание модели")
@@ -45,4 +43,4 @@ class FakeReviewDetector:
             merged_dict = {**precessed_review, **review}
             output.append(merged_dict)
 
-        return {"reviews": output[:3], "avg_reliability" : prob_sum / counter}
+        return {"reviews": output[:3], "avg_reliability": prob_sum / counter}
