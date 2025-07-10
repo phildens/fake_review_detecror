@@ -18,7 +18,7 @@ class Scraper:
         # options.add_argument("--window-size=1920,1080")
         # options.add_argument("--disable-gpu")
         self.__driver = webdriver.Remote(
-            command_executor='app_network:4444/wd/hub',
+            command_executor='http://browser:4444/wd/hub',
             options=options
         )
         self.__logger = ScraperLogger(logger)
