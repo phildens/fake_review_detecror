@@ -4,6 +4,8 @@ services:
     build: web_api/
     ports:
       - 8000:8000
+    networks:
+      - app_network
 
   studcamp-scraper:
     build: studcamp-scraper/
@@ -14,9 +16,12 @@ services:
 
   browser:
     image: selenium/standalone-chrome
+    volumes:
+      - /dev/shm:/dev/shm
     ports:
       - 4444:4444
-
+    networks:
+      - app_network
 
 networks:
   app_network:
