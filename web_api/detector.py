@@ -16,8 +16,12 @@ def prediction_decorator(original_func):
 
 class FakeReviewDetector:
     def __init__(self):
-        self.tokenizer = AutoTokenizer.from_pretrained('tokenizer')
-        self.model = AutoModelForSequenceClassification.from_pretrained('model')
+        model_name = ("SravaniNirati/_fake_review_detection")
+
+        # Загрузка токенизатора и модели
+
+        self.tokenizer = AutoTokenizer.from_pretrained(model_name)
+        self.model = AutoModelForSequenceClassification.from_pretrained(model_name)
         print("создание модели")
 
     @prediction_decorator
