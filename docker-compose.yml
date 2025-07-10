@@ -13,6 +13,8 @@ services:
       - 8200:8200
     networks:
       - app_network
+    depends_on:
+      - browser
 
   browser:
     image: selenium/standalone-chrome
@@ -24,3 +26,4 @@ services:
 networks:
   app_network:
     driver: bridge
+
