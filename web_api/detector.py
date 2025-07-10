@@ -16,7 +16,7 @@ def prediction_decorator(original_func):
 
 class FakeReviewDetector:
     def __init__(self):
-        model_name = ("SravaniNirati/_fake_review_detection")
+        model_name = ("SravaniNirati/bert_fake_review_detection")
 
         # Загрузка токенизатора и модели
 
