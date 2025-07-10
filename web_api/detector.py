@@ -41,4 +41,4 @@ class FakeReviewDetector:
             merged_dict = {**precessed_review, **review}
             output.append(merged_dict)
 
-        return {"reviews": output, "avg_reliability" : prob_sum / counter}
+        return {"reviews": output[:3], "avg_reliability" : prob_sum / counter}
