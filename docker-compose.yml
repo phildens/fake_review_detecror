@@ -2,6 +2,8 @@ version: "3"
 services:
   web_api:
     build: web_api/
+    environment:
+      - HF_TOKEN=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
     ports:
       - 8000:8000
     networks:
