@@ -25,5 +25,5 @@ services:
 
 networks:
   app_network:
-    driver: brige
+    driver: bridge
 
