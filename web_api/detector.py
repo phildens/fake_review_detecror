@@ -30,14 +30,14 @@ class FakeReviewDetector:
 
     def detect_one_review(self, rewiew: str) -> dict[str, bool | float]:
 
-        return {"is_fake": True, "fake_prob": 0.85}
+        return self.predict_fake_review(rewiew)
 
     def detect_list_review(self, reviews):
         output = list()
         counter = 0
         prob_sum = 0
         for review in reviews:
-            precessed_review = self.predict_fake_review(review)
+            precessed_review = self.predict_fake_review(review['review_body'])
             counter += 1
             prob_sum += precessed_review["fake_prob"]
 
