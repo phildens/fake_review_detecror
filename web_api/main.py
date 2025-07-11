@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from web_api.detector import FakeReviewDetector
 from web_api.models import Review, MarketLink
 import requests
@@ -18,10 +18,7 @@ async def detect_one(review: Review):
 
 
 @app.get("/detect_review_from_link")
-async def detect_list(link: str):
-
-
-
+async def detect_list(link):
     url = "http://studcamp-scraper:8200/api/v1/parse_url"
     params = {
         "url": link,
