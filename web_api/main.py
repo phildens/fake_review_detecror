@@ -31,7 +31,7 @@ async def detect_one(review: Review):
 async def detect_list(url):
     url = "http://studcamp-scraper:8200/api/v1/parse_url"
     params = {
-        "url": make_reviews_url(link),
+        "url": make_reviews_url(url),
         "limit": 20
     }
     response = requests.get(url, params=params)
