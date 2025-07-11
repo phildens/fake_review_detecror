@@ -28,7 +28,7 @@ async def detect_one(review: Review):
 
 
 @app.get("/detect_review_from_link")
-async def detect_list(link):
+async def detect_list(url):
     url = "http://studcamp-scraper:8200/api/v1/parse_url"
     params = {
         "url": make_reviews_url(link),
