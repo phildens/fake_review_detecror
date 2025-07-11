@@ -37,6 +37,8 @@ async def detect_list(url):
     }
     response = requests.get(suka, params=params)
     response_json = response.json()
+    print(response_json)
+    print("--------")
 
     rewiews = list(response.json()['reviews'])
     detect_rewiev = detector.detect_list_review(rewiews)
