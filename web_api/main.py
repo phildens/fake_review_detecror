@@ -12,7 +12,7 @@ app = FastAPI()
 #     return {"message": "Hello World"}
 
 
-@app.get("/detect_one_review")
+@app.post("/detect_one_review")
 async def detect_one(review: Review):
     return detector.detect_one_review(review.text)
 
