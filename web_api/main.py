@@ -10,6 +10,14 @@ import time
 
 detector = FakeReviewDetector()
 app = FastAPI()
+def remove_duplicates_by_key(list_of_dicts, key):
+    seen_keys = set()
+    unique_list = []
+    for item in list_of_dicts:
+        if item[key] not in seen_keys:
+            seen_keys.add(item[key])
+            unique_list.append(item)
+    return unique_list
 
 app.mount("/static", StaticFiles(directory="web_api/build/static"), name="static")
 
@@ -51,7 +59,7 @@ async def detect_list(url):
     print()
     params = {
         "url": make_reviews_url(url),
-        "limit": 20
+        "limit": 50
     }
     response = requests.get(suka, params=params)
     response_json = response.json()
@@ -60,6 +68,7 @@ async def detect_list(url):
     print("--------")
     st_time = time.time()
     rewiews = list(response.json()['reviews'])
+    rewiews = remove_duplicates_by_key(rewiews, "review_id")
     detect_rewiev = detector.detect_list_review(rewiews)
     main_data_from_json = {"url": response_json['url']}
     merged_dict = {**detect_rewiev, **main_data_from_json}
