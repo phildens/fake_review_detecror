@@ -24,8 +24,8 @@ def make_reviews_url(url: str) -> str:
 
 
 @app.get("/detect_one_review")
-async def detect_one(review: Review):
-    return detector.detect_one_review(review.text)
+async def detect_one(review: str):
+    return detector.detect_one_review(review)
 
 
 @app.get("/detect_review_from_link")
