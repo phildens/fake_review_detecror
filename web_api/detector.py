@@ -32,7 +32,7 @@ class FakeReviewDetector:
         output = list()
         counter = 0
         prob_sum = 0
-        for review in data['rewiews']:
+        for review in data:
             precessed_review = self.predict_fake_review(review['review_body'])
             counter += 1
             prob_sum += precessed_review["fake_prob"]
