@@ -12,19 +12,19 @@ app = FastAPI()
 #     return {"message": "Hello World"}
 
 
-@app.post("/detect_one_review")
+@app.get("/detect_one_review")
 async def detect_one(review: Review):
     return detector.detect_one_review(review.text)
 
 
-@app.post("/detect_review_from_link")
-async def detect_list(link: MarketLink):
+@app.get("/detect_review_from_link")
+async def detect_list(link: str):
 
 
 
     url = "http://studcamp-scraper:8200/api/v1/parse_url"
     params = {
-        "url": link.url,
+        "url": link,
         "limit": 20
     }
     response = requests.get(url, params=params)
