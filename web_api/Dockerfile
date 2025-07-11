@@ -4,7 +4,7 @@ COPY . /app/web_api
 
 
 RUN pip install -U "huggingface_hub[cli]" transformers
-RUN huggingface-cli login --token $HF_TOKEN
+RUN huggingface-cli login --token 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
 RUN pip install --no-cache-dir --upgrade -r /app/web_api/requirements.txt
 RUN pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
 
