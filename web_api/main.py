@@ -4,7 +4,7 @@ from web_api.models import Review, MarketLink
 from fastapi.responses import JSONResponse
 import requests
 from fastapi.staticfiles import StaticFiles
-
+from starlette.responses import FileResponse
 from urllib.parse import urlparse, urlunparse
 import time
 
@@ -12,6 +12,11 @@ detector = FakeReviewDetector()
 app = FastAPI()
 
 app.mount("/static", StaticFiles(directory="build/static"), name="static")
+
+
+@app.get("/")
+async def read_index():
+    return FileResponse('build/index.html')
 
 
 def make_reviews_url(url: str) -> str:
@@ -23,6 +28,7 @@ def make_reviews_url(url: str) -> str:
     base = urlunparse((parsed.scheme, parsed.netloc, parsed.path, '', '', ''))
     # Добавляем /reviews, убирая возможный завершающий слэш
     return base.rstrip('/') + '/reviews'
+
 
 # @app.get("/")
 # async def root():
@@ -52,7 +58,7 @@ async def detect_list(url):
     st_time = time.time()
     rewiews = list(response.json()['reviews'])
     detect_rewiev = detector.detect_list_review(rewiews)
-    main_data_from_json = {"url" : response_json['url']}
+    main_data_from_json = {"url": response_json['url']}
     merged_dict = {**detect_rewiev, **main_data_from_json}
     print(time.time() - st_time)
     headers = {"Access-Control-Allow-Origin": "*"}
