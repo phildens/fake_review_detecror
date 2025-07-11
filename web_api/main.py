@@ -18,6 +18,9 @@ app.mount("/static", StaticFiles(directory="build/static"), name="static")
 async def read_index():
     return FileResponse('build/index.html')
 
+@app.get("/favicon.ico")
+async def read_index():
+    return FileResponse('build/favicon.ico')
 
 def make_reviews_url(url: str) -> str:
     # Разбираем URL
