@@ -17,7 +17,7 @@ async def detect_one(review: Review):
     return detector.detect_one_review(review.text)
 
 
-@app.get("/detect_review_from_link")
+@app.post("/detect_review_from_link")
 async def detect_list(link: MarketLink):
     url = "http://studcamp-scraper:8200/api/v1/parse_url"
     params = {
