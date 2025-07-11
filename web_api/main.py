@@ -25,5 +25,6 @@ async def detect_list(link: MarketLink):
         "limit": 20
     }
     response = requests.get(url, params=params)
-
-    return detector.detect_list_review(response.json()['reviews'])
+    rewiews = response.json()['reviews']
+    print(rewiews)
+    return detector.detect_list_review(rewiews)
