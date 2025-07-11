@@ -4,6 +4,7 @@ from web_api.models import Review, MarketLink
 from fastapi.responses import JSONResponse
 import requests
 from urllib.parse import urlparse, urlunparse
+import time
 
 detector = FakeReviewDetector()
 app = FastAPI()
@@ -30,6 +31,8 @@ async def detect_one(review: Review):
 @app.get("/detect_review_from_link")
 async def detect_list(url):
     suka = "http://studcamp-scraper:8200/api/v1/parse_url"
+    st_time = time.time()
+
     print()
     params = {
         "url": make_reviews_url(url),
@@ -38,13 +41,14 @@ async def detect_list(url):
     response = requests.get(suka, params=params)
     response_json = response.json()
     print(response_json)
+    print(time.time() - st_time)
     print("--------")
-
+    st_time = time.time()
     rewiews = list(response.json()['reviews'])
     detect_rewiev = detector.detect_list_review(rewiews)
     main_data_from_json = {"url" : response_json['url']}
     merged_dict = {**detect_rewiev, **main_data_from_json}
-
+    print(time.time() - st_time)
     headers = {"Access-Control-Allow-Origin": "*"}
     print(merged_dict)
     return JSONResponse(content=merged_dict, headers=headers)
