@@ -35,7 +35,7 @@ class FakeReviewDetector:
         for review in data:
             precessed_review = self.predict_fake_review(review['review_body'])
             counter += 1
-            prob_sum += precessed_review["fake_prob"]
+            prob_sum += precessed_review["reliability"]
 
             merged_dict = {**precessed_review, **review}
             output.append(merged_dict)
