@@ -21,7 +21,7 @@ class FakeReviewDetector:
 
         return {
             'is_fake': out_list[0][1] >= 0.5,
-            'reliability': out_list[0][1]
+            'reliability': 1 - out_list[0][1]
         }
 
     def detect_one_review(self, rewiew: str) -> dict[str, bool | float]:
