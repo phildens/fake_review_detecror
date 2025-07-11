@@ -29,12 +29,13 @@ async def detect_one(review: Review):
 
 @app.get("/detect_review_from_link")
 async def detect_list(url):
-    url = "http://studcamp-scraper:8200/api/v1/parse_url"
+    suka = "http://studcamp-scraper:8200/api/v1/parse_url"
+    print()
     params = {
         "url": make_reviews_url(url),
         "limit": 20
     }
-    response = requests.get(url, params=params)
+    response = requests.get(suka, params=params)
     response_json = response.json()
 
     rewiews = list(response.json()['reviews'])
