@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Request
 from web_api.detector import FakeReviewDetector
 from web_api.models import Review, MarketLink
+from fastapi.responses import JSONResponse
 import requests
 
 detector = FakeReviewDetector()
@@ -31,4 +32,6 @@ async def detect_list(link):
     detect_rewiev = detector.detect_list_review(rewiews)
     main_data_from_json = {"url" : response_json['url']}
     merged_dict = {**detect_rewiev, **main_data_from_json}
-    return merged_dict
+
+    headers = {"Access-Control-Allow-Origin": "*"}
+    return JSONResponse(content=merged_dict, headers=headers)
