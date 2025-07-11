@@ -3,15 +3,7 @@ import torch
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
 
-def prediction_decorator(original_func):
-    def wrapper(text: str) -> dict:
-        pred = original_func(text)
-        return {
-            'is_fake': pred[0][1] >= 0.5,
-            'reliability': pred[0][1]
-        }
 
-    return wrapper
 
 
 class FakeReviewDetector:
@@ -22,21 +14,25 @@ class FakeReviewDetector:
         self.model = AutoModelForSequenceClassification.from_pretrained(model_name)
         print("создание модели")
 
-    @prediction_decorator
     def predict_fake_review(self, text):
         inputs = self.tokenizer(text, return_tensors="pt", truncation=True, padding=True)
         outputs = self.model(**inputs)
-        return torch.softmax(outputs.logits, dim=-1).tolist()
+        out_list = torch.softmax(outputs.logits, dim=-1).tolist()
+
+        return {
+            'is_fake': out_list[0][1] >= 0.5,
+            'reliability': out_list[0][1]
+        }
 
     def detect_one_review(self, rewiew: str) -> dict[str, bool | float]:
 
         return self.predict_fake_review(rewiew)
 
-    def detect_list_review(self, reviews):
+    def detect_list_review(self, data):
         output = list()
         counter = 0
         prob_sum = 0
-        for review in reviews:
+        for review in data['rewiews']:
             precessed_review = self.predict_fake_review(review['review_body'])
             counter += 1
             prob_sum += precessed_review["fake_prob"]
