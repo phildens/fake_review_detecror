@@ -40,4 +40,9 @@ class FakeReviewDetector:
             merged_dict = {**precessed_review, **review}
             output.append(merged_dict)
         output.sort(key=lambda x: x["reliability"], reverse=True)
-        return {"reviews": output[:3], "avg_reliability": prob_sum / counter}
+        if counter > 3:
+            crop_output = output[:3]
+
+        else:
+            crop_output = output
+        return {"reviews": crop_output, "avg_reliability": prob_sum / counter}
