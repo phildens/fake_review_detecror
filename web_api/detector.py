@@ -45,4 +45,6 @@ class FakeReviewDetector:
 
         else:
             crop_output = output
-        return {"reviews": crop_output, "avg_reliability": prob_sum / counter}
+
+        out_doct = {"reviews": crop_output, "avg_reliability": prob_sum / counter}
+        return out_doct
