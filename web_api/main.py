@@ -3,11 +3,17 @@ from web_api.detector import FakeReviewDetector
 from web_api.models import Review, MarketLink
 from fastapi.responses import JSONResponse
 import requests
+from fastapi.staticfiles import StaticFiles
+
 from urllib.parse import urlparse, urlunparse
 import time
 
 detector = FakeReviewDetector()
 app = FastAPI()
+
+app.mount("/static", StaticFiles(directory="build/static"), name="static")
+
+
 def make_reviews_url(url: str) -> str:
     # Разбираем URL
     parsed = urlparse(url)
