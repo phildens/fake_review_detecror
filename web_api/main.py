@@ -11,16 +11,16 @@ import time
 detector = FakeReviewDetector()
 app = FastAPI()
 
-app.mount("/static", StaticFiles(directory="build/static"), name="static")
+app.mount("/static", StaticFiles(directory="web_api/build/static"), name="static")
 
 
 @app.get("/")
 async def read_index():
-    return FileResponse('build/index.html')
+    return FileResponse('web_api/build/index.html')
 
 @app.get("/favicon.ico")
 async def read_index():
-    return FileResponse('build/favicon.ico')
+    return FileResponse('web_api/build/favicon.ico')
 
 def make_reviews_url(url: str) -> str:
     # Разбираем URL
