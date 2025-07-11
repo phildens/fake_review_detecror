@@ -25,5 +25,10 @@ async def detect_list(link: MarketLink):
         "limit": 20
     }
     response = requests.get(url, params=params)
+    response_json = response.json()
+
     rewiews = list(response.json()['reviews'])
-    return detector.detect_list_review(rewiews)
+    detect_rewiev = detector.detect_list_review(rewiews)
+    main_data_from_json = response_json.pop('reviews', None)
+    merged_dict = {**detect_rewiev, **main_data_from_json}
+    return merged_dict
