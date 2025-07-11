@@ -29,6 +29,7 @@ class FakeReviewDetector:
         return torch.softmax(outputs.logits, dim=-1).tolist()
 
     def detect_one_review(self, rewiew: str) -> dict[str, bool | float]:
+
         return {"is_fake": True, "fake_prob": 0.85}
 
     def detect_list_review(self, reviews):
@@ -36,7 +37,7 @@ class FakeReviewDetector:
         counter = 0
         prob_sum = 0
         for review in reviews:
-            precessed_review = self.detect_one_review(review)
+            precessed_review = self.predict_fake_review(review)
             counter += 1
             prob_sum += precessed_review["fake_prob"]
 
