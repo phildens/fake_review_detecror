@@ -44,4 +44,5 @@ async def detect_list(url):
     merged_dict = {**detect_rewiev, **main_data_from_json}
 
     headers = {"Access-Control-Allow-Origin": "*"}
+    print(merged_dict)
     return JSONResponse(content=merged_dict, headers=headers)
